@@ -89,7 +89,7 @@ static constexpr EnumArray<Sequence, GCodeFile, static_cast<int>(Sequence::_cnt)
                                                       "M1705 N\n" // Autoretract sequence
                                                       "M400\n"
                                                       "M906 P0\n" // Restore E current
-                                                      "G750 Y98.5 F21000\n"
+                                                      "G750 Y118.5 F21000\n"
                                                       "G750 Y91.5 F21000",
                                  } },
         // Like purge_clean, but without the retract at the end.

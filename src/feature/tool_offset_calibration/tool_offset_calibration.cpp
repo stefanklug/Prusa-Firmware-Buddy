@@ -135,7 +135,7 @@ ToolTemperatures get_tool_temperatures(PhysicalToolIndex physical_tool) {
     if (filament != FilamentType::none) {
         const auto params = filament.parameters();
 #if HAS_NOZZLE_CLEANER()
-        return { params.nozzle_temperature, std::min<int16_t>(params.nozzle_preheat_temperature, DEFAULT_Z_PROBING_TEMP), DEFAULT_XY_PROBING_TEMP };
+        return { params.nozzle_temperature, params.nozzle_preheat_temperature, DEFAULT_XY_PROBING_TEMP };
 #elif HAS_NOZZLE_CLEANER_LITE()
         // The lite cleaner cleans at the preheat temperature and rests on the
         // touchpoint until the cool-down temperature; Z probing then runs at
