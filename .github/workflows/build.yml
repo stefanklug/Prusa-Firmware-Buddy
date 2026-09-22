@@ -1,0 +1,30 @@
+name: Build release
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+-sk*'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: sudo apt install -y gettext
+
+    - name: build
+      run: python3 utils/build.py --preset coreone_indx --build-type release
+
+    - name: Create release file
+      run: cp build/coreone_indx_release_boot/firmware.bbf COREONE_COREONE+GEN2_INDX_firmware_${{github.ref_name}}.bbf
+
+    - name: Upload release
+      uses: softprops/action-gh-release@v3.0.3
+      with:
+        files: COREONE_COREONE+GEN2_INDX_firmware_${{github.ref_name}}.bbf
+        generate_release_notes: true
+        previous_tag: v6.9.1-beta
